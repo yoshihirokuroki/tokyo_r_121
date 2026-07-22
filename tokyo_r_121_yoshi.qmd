@@ -107,6 +107,12 @@ Model-Informed Drug Development ──
 :::
 
 ```{r}
+#| label: setup
+#| include: false
+library(ragg)
+```
+
+```{r}
 #| label: mns-poppk
 #| fig-width: 3.8
 #| fig-height: 1.5
