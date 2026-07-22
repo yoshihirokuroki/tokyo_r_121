@@ -1,0 +1,125 @@
+/*-- scss:defaults --*/
+
+// TokyoR 2026-07-25 発表用カスタムテーマ
+// Model-Informed Drug Development と R — ICH M15 の時代へ
+
+$body-bg: #fafafa;
+$body-color: #2b2b2b;
+$link-color: #1D9E75;
+$selection-bg: #1D9E75;
+
+$presentation-font-size-root: 32px;
+$presentation-heading-font: "Helvetica Neue", "Hiragino Sans", "Yu Gothic", sans-serif;
+$presentation-font-family: "Helvetica Neue", "Hiragino Sans", "Yu Gothic", sans-serif;
+
+// Header colors
+$presentation-heading-color: #1D9E75;
+
+/*-- scss:rules --*/
+
+// Small text utility class
+.reveal .small {
+  font-size: 0.7em;
+  color: #666;
+}
+
+// Reduce heading emphasis
+.reveal h1 {
+  font-weight: 300;
+  font-size: 1.6em;
+}
+
+.reveal h2 {
+  color: #1D9E75;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.3em;
+  font-weight: 400;
+  font-size: 1.25em;
+}
+
+.reveal h3 {
+  color: #333;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+// H4 — used as intra-slide subheading (H3 was reserved because
+// RevealJS treats bare ### as a potential slide separator).
+// Style H4 to look identical to what H3 would have.
+.reveal h4 {
+  color: #333;
+  font-weight: 500;
+  font-size: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+// Callout box tuning
+.reveal .callout {
+  margin: 0.5em 0;
+}
+
+.reveal .callout-body {
+  font-size: 0.85em;
+}
+
+// Compact tables
+.reveal table {
+  font-size: 0.85em;
+}
+
+.reveal table th {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+// Code blocks
+.reveal pre {
+  font-size: 0.7em;
+  box-shadow: none;
+  border: 1px solid #eee;
+}
+
+.reveal code {
+  color: #d63384;
+  font-family: "Menlo", "Monaco", "Consolas", monospace;
+}
+
+// Slide number
+.reveal .slide-number {
+  color: #999;
+  font-size: 0.6em;
+}
+
+// Footer
+.reveal .footer {
+  color: #999;
+  font-size: 0.6em;
+}
+
+// Blockquote (used for narration in outline, less prominent here)
+.reveal blockquote {
+  border-left: 3px solid #1D9E75;
+  padding-left: 1em;
+  font-style: normal;
+  color: #555;
+}
+
+// Center alignment class
+.reveal .center {
+  text-align: center;
+}
+
+// Columns spacing
+.reveal .columns {
+  gap: 1em;
+}
+
+// Fragment (progressive reveal) styling
+.reveal .fragment {
+  opacity: 0.3;
+}
+
+.reveal .fragment.visible {
+  opacity: 1;
+}
