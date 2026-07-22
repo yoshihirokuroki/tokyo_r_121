@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "index.html#医薬品開発と-ich",
+    "href": "index.html#医薬品開発と-ich",
+    "title": "Model-Informed Drug Development と R",
+    "section": "医薬品開発と ICH",
+    "text": "医薬品開発と ICH\n\n医薬品の審査に要求されるエビデンスを規制当局間で統一するための国際的枠組み\n\n\n\n\n\n\n\n\nInternational Council for Harmonisation of Technical Requirements for Pharmaceuticals for Human Use（ICH）\n\n\n“ICH brings together the medicines regulatory authorities and pharmaceutical industry around the world. ICH aims to achieve greater harmonisation worldwide for the development and approval of safe, effective, and high-quality medicines in the most resource-efficient manner.”\n\n— European Medicines Agency\n\n\n\n\n\n\n\n沿革\n\n1990 年、EU / US / Japan の 3 極合意として発足\n2015 年、スイス法下の非営利組織として再編\n17 の Regulatory Members、32 の Observers（2026 年時点）\n\n\n今日の発表で登場する ICH ガイドライン\n\nM15 — MIDD 総則（2 日前に EMA 発効）\nE17 — 多地域臨床試験の設計と実施\nE5 — 外国臨床データの受け入れ／民族差\n\n\n\n今日は、R による分析そのものの話はしません。Rを使った分析結果をエビデンスとして、 医薬品開発の意思決定に活用するための規制について話します。\nまず前提として、ICH という枠組みからお話しします。 これは、医薬品の審査に要求されるエビデンスを規制当局間で統一するための、 国際的な枠組みです。安全で有効な医薬品を効率的に開発し、そのエビデンスを 審査して承認するための基準を国際的に調和させることを目指しています。\n1990 年に日米欧の 3 極合意として発足し、2015 年に非営利組織として再編されました。 今日は M15、E17、E5 という 3 つのガイドラインが登場します。 特に M15 は、EMA で 2 日前に発効したばかりの、MIDD の総則です。"
+  },
+  {
+    "objectID": "index.html#middモデルが医薬品開発の意思決定を支える",
+    "href": "index.html#middモデルが医薬品開発の意思決定を支える",
+    "title": "Model-Informed Drug Development と R",
+    "section": "MIDD：モデルが医薬品開発の意思決定を支える",
+    "text": "MIDD：モデルが医薬品開発の意思決定を支える\n\nModel-Informed Drug Development ── 臨床試験だけに頼らず、モデリング&シミュレーションで意思決定を支援する\n\n\n\n\n母集団薬物動態／薬力学（popPK/PD）モデル\n\n\n非線形混合効果モデル\n\n\n\n\n\n\n\n\n\n\n\n\n\n生理学的薬物動態（PBPK）モデル\n\n\n常微分方程式系\n\n\n\n  \n    \n      \n    \n    \n      \n    \n  \n  \n  Gut\n  \n  Portal\n  vein\n  \n  Liver\n  \n  Systemic\n  compart.\n  \n  \n  \n  \n  \n  CL_hep\n  \n  CL\n\n\n\n\n\n曝露ー反応（Exposure-Response）モデル\n\n\nロジスティック回帰／Cox比例ハザードモデル\n\n\n\n\n\n\n\n\n\n\n\n\n\n定量的システム薬理学（QSP）モデル\n\n\n非線形・大規模常微分方程式系\n\n\n\n  \n  \n  dC1/dt = k1·A - k2·C1\n  dR/dt = kin - kout·R\n  dE/dt = k·(1-E)·S\n  dP/dt = g·C1·R - d·P\n  dS/dt = a·E - b·S\n  dT/dt = r·P - k·T\n\n\n\n\n\nDisease Trajectory Model (DTM)\n\n\n潜在クラス混合モデル (LCMM) / 混合効果モデル\n\n\n\n\n\n\n\n\n\n\n\n\n\n今日の事例はここ\n\n\n→\n\n\nSLE の DTM を\nR で読み解く\n\n\n\n\n冒頭のスライドで “Model-Informed Drug Development と R” と述べました。 MIDDとは “Model-Informed Drug Development” の略で、modeling & simulationで予め「何を試すべきか」を検討し、医薬品開発の次の段階のデータ を収集するための意思決定を支援するアプローチです。\nここに代表的な技術を並べました。このほかにも多々ありますが、母集団薬物動態の popPK/PD、 生理学的薬物動態 PBPK、曝露ー反応関係を検討する Exposure-Response、 システム薬理学 QSP、そして今日の主題である疾患進行モデル Disease Trajectory Model。 種類は違っても、共通点が二つあります。\n一つは、すべて R で実装できること。 もう一つは、いずれも意思決定のためのモデルだということです。 今日はこの中の DTM を、SLEという疾患 の事例で読み解いていきます。"
+  },
+  {
+    "objectID": "index.html#なぜ今日ich-m15の話題なのか",
+    "href": "index.html#なぜ今日ich-m15の話題なのか",
+    "title": "Model-Informed Drug Development と R",
+    "section": "なぜ今日ICH M15の話題なのか？",
+    "text": "なぜ今日ICH M15の話題なのか？\n\n\n\n\n\n\n\nICH M15：General Principles for Model-Informed Drug Development\n\n\n\n\n\n\n段階\n日付\n\n\nStep 4 採択\n2026年1月29日\n\n\nEMA 発効\n2026年7月23日 ← 2日前\n\n\nFDA 最終化\n2026年6月\n\n\n\n\n\n\n\n\n\nMIDD の実施と評価の共通言語が、\n世界で初めて成立した\n\n\n7月23日、EMAでICH M15が発効しました。 Model-Informed Drug Development に関するICH初の包括的な総則です。 これまでMIDD関連の要求はE4、E5、E17、M12、M13 など個別のガイドラインに分散していて、横断的な上位原則がありませんでした。 世界で初めてこれが束ねられた。 今日の発表は、その2日後です。"
+  },
+  {
+    "objectID": "index.html#m15が変えるものmiddの思想的な転換",
+    "href": "index.html#m15が変えるものmiddの思想的な転換",
+    "title": "Model-Informed Drug Development と R",
+    "section": "M15が変えるもの：MIDDの思想的な転換",
+    "text": "M15が変えるもの：MIDDの思想的な転換\n\n\n\n\n\n\n\n\n\n❌ 従来の想定\n\n\nモデル構築法の技術的な規定\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n⭕️ M15 が規定するもの\n\n\nモデルから生成されたエビデンスを\nどう評価し、当局と共有するか\n\n\n\n\n\n\n“how to model” ではなく\n“how to assess and communicate”\n\n\n\n思想的源流：ASME V&V 40（医療機器 credibility 評価規格）\nキーワード：risk-based / fit-for-purpose / context-of-use\n手法非依存：popPK/PD、PBPK、E-R、QSP、DTM ── すべてに適用\n\n\n\nM15の思想的な核心を先にお話しします。 このガイドラインは、モデルをどう作るかを規定していません。 規定しているのは、モデルが示す洞察やシミュレーションで得られたエビデンスを どう評価し、当局とどう対話するか、です。 “how to model” ではなく、“how to assess and communicate”。 これは重要な転換で、モデリングを補助的な技術活動から、 意思決定支援の正式な規制上の営みへ格上げする文書だ、と 総論資料では表現されています。\n思想的源流は医療機器のcredibility評価規格であるASME V&V 40（2018）です。 risk-basedとfit-for-purposeという発想が製薬MIDDに翻案されています。"
+  },
+  {
+    "objectID": "index.html#m15をどう読むか3つの問いに整理する",
+    "href": "index.html#m15をどう読むか3つの問いに整理する",
+    "title": "Model-Informed Drug Development と R",
+    "section": "M15をどう読むか：3つの問いに整理する",
+    "text": "M15をどう読むか：3つの問いに整理する\n\n\n\n\n① モデルは何のために作られたか？\n\n\n\nQuestion of Interest (QoI)\ncontext of use\nModel Analysis Plan (MAP) の事前規定\n\n\n\n\n\n\n\n\n\n② モデルは信じてよいか？\n\n\n\nverification（計算の正確性）\nvalidation（データ・知識との整合）\napplicability（用途への適切性）\n\n\n\n\n\n\n\n\n\n③ モデルの結果は意思決定にどう影響するか？\n\n\n\nmodel influence（決定への重み）\nconsequence of wrong decision\nmodel risk = influence × consequence\n\n\n\n\n\n\nこれらすべてが assessment table として文書化される\n\n\n公式文書の構造とは異なりますが、本発表では、M15は文書全体を通して3つの問いに答えることを求めていると捉えます。 モデルは何のために作られたか、モデルは信じてよいか、 モデル由来のエビデンスは意思決定にどう影響するか。 この3つが assessment table という形で文書化され、 開発計画から規制申請までを貫きます。 今日はこの3つの問いで、SLE Disease Trajectory Model という 実際の事例を読み解いていきます。"
+  },
+  {
+    "objectID": "index.html#経時的に変化する疾患重症度とその解析",
+    "href": "index.html#経時的に変化する疾患重症度とその解析",
+    "title": "Model-Informed Drug Development と R",
+    "section": "経時的に変化する疾患重症度とその解析",
+    "text": "経時的に変化する疾患重症度とその解析\n\n\n現代の用量選択：Exposure-Response\n\\[\\text{logit}(P[\\text{response}]) = \\alpha + \\beta \\cdot \\text{exposure}\\]\n\nexposure = AUC, Cmax, Ctrough, Cavg\n使用パッケージ：glm(), lme4, nlme\n\n安全性・イベント時間の解析\n\nCox 比例ハザードモデル → survival::coxph()\nexposure で層別化 → survival, survminer\n\n\n \n\n\n\nしかし\n時間とともに変化する疾患重症度と用量／曝露量の関係をどうモデル化するか？\n\n\n  \n    ベースライン\n    [重症]\n  \n  \n    \n  \n  \n    52週後\n    [？]\n  \n\n\n→ Disease Trajectory Model (DTM)\n\n\n\n現代の用量選択は、用量そのものではなく exposure、つまり AUC や Cmax といった 身体が薬物に曝された量を説明変数にした exposure-response 解析が主流です。 安全性や time-to-event の解析では、exposureを共変量とする Cox 比例ハザードモデルや、exposure で層別化した生存解析が使われます。\nこれらは静的なスナップショットです。 SLEのように高いプラセボ応答が時期や個人差 によってしっかんの活動性がバラバラな疾患では、症状治療効果の検出が難しく、 疾患の経過そのものをモデル化する、というアプローチが必要になります。"
+  },
+  {
+    "objectID": "index.html#sle試験デザインが困難な自己免疫疾患",
+    "href": "index.html#sle試験デザインが困難な自己免疫疾患",
+    "title": "Model-Informed Drug Development と R",
+    "section": "SLE：試験デザインが困難な自己免疫疾患",
+    "text": "SLE：試験デザインが困難な自己免疫疾患\n\n\n\n\nSystemic Lupus Erythematosus（全身性エリテマトーデス）\n\nMalar rash（顔面紅斑）\nDoktorinternet, CC BY-SA 4.0,\nvia Wikimedia Commons\n\n\n多臓器を侵す全身性の自己免疫疾患\n\n皮膚（顔面紅斑・光線過敏）、腎、関節、神経、循環器、血液\n高いプラセボ + 標準治療応答率により治療効果を示すことが困難\n\n活動性の評価尺度は複雑\n\nSLEDAI ─ 24 項目・9 臓器系の重み付き累積指標\nBILAG ─ 9 臓器系の順序尺度による複合指標\nPGA ─ 医師による 0–100 mm の視覚アナログ評価\netc.\n\n\n\n\n\n客観的で単一の効果指標が存在しない\n→ 過去 60 年で承認薬わずか 2 剤\n\n\n\n\n\n\n今日の事例は SLE、全身性エリテマトーデスという自己免疫疾患です。 典型的な症状が、写真の顔面の紅斑。malar rash、蝶形紅斑とも呼ばれ、 SLE の分類基準の一つになっています。\nSLE の難しさは、皮膚だけでなく腎臓、関節、神経、循環器、血液と、 複数の臓器系にまたがって症状が現れることです。 だから評価尺度も複雑で、SLEDAI、BILAG、PGA といった指標があり、 単一の客観的な指標では捉えられません。\nその結果、過去 60 年で承認された治療薬はわずか 2 剤です。 効果を客観的に評価しにくい疾患だからこそ、 モデリングのアプローチが意味を持ちます。"
+  },
+  {
+    "objectID": "index.html#事例dtm-goteti-et-al.-2023-の全体像",
+    "href": "index.html#事例dtm-goteti-et-al.-2023-の全体像",
+    "title": "Model-Informed Drug Development と R",
+    "section": "事例：DTM (Goteti et al. 2023) の全体像",
+    "text": "事例：DTM (Goteti et al. 2023) の全体像\n\n\n\nDisease trajectory of SLE clinical endpoints and covariates\naffecting disease severity and probability of response\nGoteti et al. CPT: PSP 2023;12(2):180-195. doi:10.1002/psp4.12888\nタグ：問い①（QoI と context of use）\n\n\n\n\n\n\n\n\nQuestion of Interest（明示的に）\n\n\nプラセボ + 標準療法群の SLE 疾患軌跡を定量化し、疾患重症度と応答確率に影響する共変量を同定する\n\n\n\n\n\n\n\n\n\n\n\nContext of Use\n\n\nMIDD の基盤モデルとして、新薬臨床試験のデザイン・組み入れ計画・エンドポイント選択を情報化する\n\n\n\n\n\n\n\n\n\n\n\nImpact on decision-making（後継論文で顕在化）\n\n\nModel-Based Meta Analysis (MBMA)（Goteti et al. 2024, doi:10.1002/psp4.13083）のプラセボ軌跡モデルとして 6 医薬品の効果量ベンチマーク基盤に\n\n\n\n\n\n\n\n\nきょう取り上げる事例はGotetiらが2023年に journal に発表した論文です。 M15の観点で最初に確認するのは Question of Interest です。 この論文は『プラセボ+標準療法の疾患軌跡を定量化する』ことを 明確な問いとして立てています。そして context of useは、 後続の新薬開発判断への情報提供です。実際、この基盤モデルは2024年のMBMA論文で 6つの化合物の効果量比較の共通尺度として使われました。 問いありきで設計されたモデル、というM15の要求を体現しています。"
+  },
+  {
+    "objectID": "index.html#モデルの構造潜在変数θと9エンドポイント",
+    "href": "index.html#モデルの構造潜在変数θと9エンドポイント",
+    "title": "Model-Informed Drug Development と R",
+    "section": "モデルの構造：潜在変数θと9エンドポイント",
+    "text": "モデルの構造：潜在変数θと9エンドポイント\n\nタグ：問い①（モデル設計）\n\n\\[\\theta_{ik}(t) = \\mu_{ik} + \\delta_{ik} \\times \\left(1 - e^{-\\lambda_{ik} \\cdot t}\\right)\\]\n\n\nパラメータの意味\n\n\\(\\mu_{ik}\\)：ベースライン疾患重症度\n\\(\\delta_{ik}\\)：長期変化の大きさ ← 地域差はここ\n\\(\\lambda_{ik}\\)：到達速度\n\n\n\n\n\n\n\n\n\n\nG\n\n\ntheta\n\ntheta(t)\nLatent Disease Activity\n\n\n\nSLEDAI\n\nSLEDAI\n\n\n\ntheta-&gt;SLEDAI\n\n\n\n\n\nBILAG\n\nBILAG\n\n\n\ntheta-&gt;BILAG\n\n\n\n\n\nPGA\n\nPGA\n\n\n\ntheta-&gt;PGA\n\n\n\n\n\naPEDD\n\naPEDD\n\n\n\ntheta-&gt;aPEDD\n\n\n\n\n\nSRI\n\nSRI\n\n\n\ntheta-&gt;SRI\n\n\n\n\n\nBICLA\n\nBICLA\n\n\n\ntheta-&gt;BICLA\n\n\n\n\n\nLLDAS\n\nLLDAS\n\n\n\ntheta-&gt;LLDAS\n\n\n\n\n\nDrop\n\nDropout\n\n\n\ntheta-&gt;Drop\n\n\n\n\n\n\n\n\n\n9つのエンドポイントを1つの潜在変数で統合\n\n\n\nモデルの核心は θ という潜在変数です。 直接観測できない疾患の重さを数式で定義し、 SLEDAIやBILAG、PGAなど9つのエンドポイントを このθの関数として表現しています。 ひとつの潜在変数が複数の観測を駆動する、 これが M15 が言う『モデル全体としての整合性を評価する』 対象になる部分です。"
+  },
+  {
+    "objectID": "index.html#r-と-stan-で実装した",
+    "href": "index.html#r-と-stan-で実装した",
+    "title": "Model-Informed Drug Development と R",
+    "section": "R と Stan で実装した",
+    "text": "R と Stan で実装した\n\nタグ：問い②（verification／再現性・トレーサビリティ）\n\n\n\n\n\n\n\n\n論文本文からの引用\n\n\n“Data integration, visualization, modeling, and simulations were conducted using R version 3.6, and estimation and inference were carried out using Bayesian methods implemented in Stan version 2.4 via RStan package version 2.21.2.”\n\n\n\n\n\n\n\n\n\n\n\n\n\n使用されたソフトウェア\n\n\n      R 3.6\n        │\n        ├── データ統合・可視化\n        ├── モデリング・シミュレーション\n        │\n        └── RStan 2.21.2\n              │\n              └── Stan 2.4（NUTS サンプラー）\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nM15 の要求\n\n\n\nvalid computerized system\nコード検証の文書化\n環境固定・バージョン管理（再現性・トレーサビリティ）\n\n\n\n\n\n\n\nR 3.6 / Stan version 2.4 / RStan package version 2.21.2 という固定バージョン記載は、\nM15が明文化した方向性と軌を一にする\n\n\n実装は R 3.6 と RStan 2.21.2、Stan 2.4 です。 M15 は valid computerized system やコード検証の文書化、環境固定を求めます。これは事実上の再現性・トレーサビリティ 要件です。この論文が2023年の時点でバージョンを明記していることは、M15が明文化 した方向性と軌を一にすると読めます。Rを規制文書に載せるとは、 単に走らせることではなく、どのRを使ったかを記録することでもある、 ということです。"
+  },
+  {
+    "objectID": "index.html#過学習はいまや規制事項である",
+    "href": "index.html#過学習はいまや規制事項である",
+    "title": "Model-Informed Drug Development と R",
+    "section": "過学習はいまや規制事項である",
+    "text": "過学習はいまや規制事項である\n\nタグ：問い①（Model Analysis Planning）+ 問い②（手法固有バイアスへの対処）\n\n\n\n\n\n\n\n\n\n\nM15 は AI/ML のリスクを名指しした\n\n\n\noverfitting（過学習）\n選択バイアス\n知識ギャップ\n\n規制文書が、AI/ML 固有のリスクを\n明示的に評価対象とした\n\n\n\n\n\nこの研究では、皆さんが explainable AI (XAI)\nで使う Shapley値（SHAP）が共変量選択に使\nわれた ─ M15 が求めるバイアスへの対処を\n具体的な手法で満たした一例\n\n\n\n  \n    \n      \n    \n  \n  \n  候補変数：数十個\n  年齢・人種・罹病期間・抗体…\n\n  \n  \n\n  \n  統計側フィルタ\n  LASSO 回帰\n  罰則付きで係数を絞る → glmnet\n\n  \n  機械学習側フィルタ\n  RF + Boruta + Shapley値（SHAP）\n  重要度検定・寄与度分解 → iml\n\n  \n  \n\n  \n  両方を通過した変数のみ採用\n  ＝ 過学習・選択バイアスへの防御\n\n\n\nM15は、AIガバナンスを 具体的な手続きとして明文化した先行事例 のひとつ\n\n\nここでは少し挑発的に「過学習はいまや規制事項である」としました。\nM15 は、AI/ML に固有のリスクを指摘しています。過学習、選択バイアス、知識ギャップ。 規制当局が AI/ML のガバナンスに正面から踏み込んだ、ということです。\nでは今日のDTMの事例はどう対処したか。統計側の LASSO と、機械学習側の Random Forest・Boruta・Shapley値。この2系統を独立に走らせ、両方で選ばれた変数 だけを採用しています。単一手法を信じない多重確認、過学習への防御です。\n一点、正確にお伝えします。M15 は SHAP のような特定の手法を明示しているわけでは ありません。M15 が求めるのは「バイアスに対処せよ」という原則で、その原則を満たす 具体的な手法として、この研究では SHAP が使われた。つまり、皆さんが explainable AI で日常的に使う手法も、規制当局がエビデンスとなるモデルの実装になっている、 ということです。"
+  },
+  {
+    "objectID": "index.html#モデル評価の三層verification-validation-applicability",
+    "href": "index.html#モデル評価の三層verification-validation-applicability",
+    "title": "Model-Informed Drug Development と R",
+    "section": "モデル評価の三層：verification / validation / applicability",
+    "text": "モデル評価の三層：verification / validation / applicability\n\nタグ：問い②（Model Evaluation の核心）\n\n\n\n\n\n\n\n\n① verification（計算の正確性）\n\n\nコード・式・計算のエラーフリー保証\n─ user-generated code の検証\n\n\n\n\n\n\n\n\n\n\n\n② validation（データ・知識との整合）\n\n\nモデル全体としてのデータ・事前情報との整合\n─ この論文での実装：\n\nRhat &lt; 1.05（MCMC 収束）\nトレースプロット目視\nVPC（Visual Predictive Check）\nWAIC / LPD（情報量規準）\nSomers’ D（応答予測の識別能）\n\n\n\n\n\n\n\n\n\n\n\n\n③ applicability assessment（用途への適切性）\n\n\n各 intended use に対する fit-for-purpose 判断\n─ 地域差・共変量分布のカバレッジ検証\n\n\n\n\n\n従来 “validation” の一語で曖昧に括られていた領域を M15 は明確に三層に分解した\n\n\nM15の中でもっとも実務的なインパクトが大きいのがここです。 従来validation の一語で曖昧に括られていた領域を、verification、validation、applicability という三層に分解しました。Verificationはコードが正しく動くこと。Validationは モデル全体としてデータと整合していること。Applicabilityは各用途に対して適切 であること。Gotetiらの論文では、Rhat、トレースプロット、VPC、WAIC、Somers’ D ——これらすべてを R で実装しています。 Rはモデルを走らせるだけでなく、 モデルの信頼性の判定を補助も提供します。"
+  },
+  {
+    "objectID": "index.html#モデルが発見したこと地域ごとに疾患の経過が異なる",
+    "href": "index.html#モデルが発見したこと地域ごとに疾患の経過が異なる",
+    "title": "Model-Informed Drug Development と R",
+    "section": "モデルが発見したこと：地域ごとに疾患の経過が異なる",
+    "text": "モデルが発見したこと：地域ごとに疾患の経過が異なる\n\nタグ：問い③（model risk と model impact の核心）\n\n\n\n\n\n\n\n\nHispanic – C/S America の δ 係数 = −0.987 (95%CI: −1.25, −0.73)\nベースラインは同じ ／ 長期軌跡は地域ごとに大きく違う\n\n\n【スライダーを操作しながら】\nモデルが医薬品開発での意思決定を支援する例をみてみましょう。 上のグラフを見てください。ベースライン——試験開始時の疾患重症度は三群で ほぼ同じです。 しかし52週後、中南米系Hispanicの軌跡が大きく下がっています。 δ係数は−0.987。ベースラインではなく、長期的な疾患の動きが地域によって異なる。 このことは中南米HispanicのSLE患者は薬物治療なし、あるいは標準治療だけでも 疾患活動が低下する、有り体に言えばこの集団で医薬品のSLE治療効果を示すのは難しい。\n下のスライダーを動かしてみます。 Hispanic C/S Americaからの組み入れが0%のとき、 プラセボ応答率は約39%。治療群が70%とすれば 差は31ポイント。有意差あり。 組み入れが60%になると、プラセボ応答率が66%まで上昇し、治療効果はわずか4ポイント になります。同じ薬、同じ試験デザイン、でも結果が逆転する。\nM15 の用語で言うと、これは model influence が最も高い場面です。モデルの結論が 直接、試験デザインを変える。誤れば患者と企業と規制当局 すべてに consequence が及びます。 だからこそ、先ほど見た厳密な model evaluation が求められていた ——という流れで読めます。"
+  },
+  {
+    "objectID": "index.html#地域差-ich-e17multi-regional-clinical-trial-mrct-設計への含意",
+    "href": "index.html#地域差-ich-e17multi-regional-clinical-trial-mrct-設計への含意",
+    "title": "Model-Informed Drug Development と R",
+    "section": "地域差 × ICH E17：Multi-Regional Clinical Trial (MRCT) 設計への含意",
+    "text": "地域差 × ICH E17：Multi-Regional Clinical Trial (MRCT) 設計への含意\n\nタグ：問い③（意思決定への影響）\n\n\n\n\n\n\n\nNote\n\n\n\nICH E17：MRCTの設計と実施に関するガイドライン\nICH E5：外国臨床データの受け入れ / 民族差\n\n\n\n\nDTM がもたらしたもの\n\n地域差を post-hoc ではなく、事前に定量化して試験デザインに組み込む\n組み入れ比率の設計根拠を、経験則ではなく モデルで示せる\n\nM15 × E17 × E5 が織りなす構造\n\n\n\nガイドライン\n役割\n\n\n\n\nM15\nモデルの信頼性評価と文書化の共通言語\n\n\nE17\nMRCTの実施原則\n\n\nE5\n民族差の受容基準\n\n\n\n\n三者を横断する assessment table がグローバル同時開発の文書効率を高める\n\n\n日本が主導して策定されたICH E17は、国際共同臨床試験での地域差の取り扱いを定めた ガイドラインです。このDTMは、地域差をpost-hocに分析するのではなく、試験設計の 前に定量化する手段として機能します。 M15、E17、E5の三つがそれぞれの側面から、 同じ問題——地域差をどう扱うか——にアプローチしています。"
+  },
+  {
+    "objectID": "index.html#proprietary-software-から-oss-へそして使えるパッケージとは",
+    "href": "index.html#proprietary-software-から-oss-へそして使えるパッケージとは",
+    "title": "Model-Informed Drug Development と R",
+    "section": "Proprietary Software から OSS へ、そして「使えるパッケージ」とは",
+    "text": "Proprietary Software から OSS へ、そして「使えるパッケージ」とは\n\nM15 時代に広がる MIDD ワークフローの選択肢\n\n\n\nM15 は method-agnostic を明文化\n\n\n\n\n\n\n\n\n\n\n従来\nM15 以後\n\n\n\n\n生物統計\nSAS など\nR など OSS 利用の拡大\n\n\nMIDD\nNONMEM など\nnlmixr2 パッケージなど\n\n\n信頼性\nエビデンスの信頼性は validation された proprietary software 使用に依存\nツールに依存せずモデルによるエビデンスの信頼性を評価する枠組み\n\n\n\n\n\n評価の焦点はモデルによるエビデンスの信頼性\nツール選択は相対化される\n\n\nモデルの信頼性を左右する要素\n（Rパッケージを例に）\n\n\n\n\n質の保証 ─ モデル選択、感度解析、共変量選択の妥当性\n\n\n\n\n\n\n\n\n資産の再利用性 ─ 次の意思決定への継承\n（適応追加、市販後評価、後継製品開発）\n\n\n\n\n\n\n\n\nパッケージエコシステムの成熟度\nCRAN 登録・継続的維持 vs. カスタム＋メンテ不足\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nrenv は環境凍結には有効 ─ でも M15 の観点からの関心は「健全なエコシステム上に載っているか」\nカスタムパッケージかつメンテナンス不足なパッケージへの依存は、審査上の潜在的なリスク要因\n\n\n\n\n\nわたしたちが使う R パッケージは、医薬品開発の意思決定基盤として選ばれる資産にもなる\n\n\n私自身、個人的に非線形混合効果モデルを扱う時は nlmixr2 を使ってきましたが、業務 では NONMEM で確立したワークフローで公式な解析を行います。一方、M15 は method-agnostic、手法非依存を明文化しました。評価の焦点は 「モデルによるエビデンスの信頼性」に移り、ツール選択は相対化される。SAS から R へ、NONMEM から nlmixr2 へという OSS への移行を、暗黙のうちに M15 は後押しします。\n規制当局が MIDD に求めるのは、単なるバイト一致の再現性ではありません。 関心があるのはおそらく三つ。解析の質、資産の再利用性、そして 我々 R ユーザーには 身近な OSS のパッケージやライブラリのエコシステムの成熟度です。\n例えば CRAN に登録され継続的に維持されるパッケージは、当局から見て扱いやすい。 逆に、メンテナンス不足のカスタムパッケージへの依存は、審査上のリスク要因になりうる。 renv は環境の凍結には有効ですが、問われているのはそもそも健全なエコシステムに 載っている環境で MIDD を実践しているか、なんです。\n私たちが日常的に使う R パッケージは、医薬品開発の意思決定基盤として選ばれる 資産にもなる。そのことをお伝えして、まとめに入りたいと思います。"
+  },
+  {
+    "objectID": "index.html#take-home-message",
+    "href": "index.html#take-home-message",
+    "title": "Model-Informed Drug Development と R",
+    "section": "Take Home Message",
+    "text": "Take Home Message\n1. あなたが使う R は、医薬品開発で用いられる R と「同じ」\nglm も survival も Shapley値（SHAP）も医薬品開発と規制の両方の意思決定を支える\n違いは「どの分野の問いに答えるか」だけ\n2. サンプリングが、結論を反転させる\nSLE 試験の地域割付も、あなたのデータの標本抽出も、同じ構造\nだから M15 は「モデルによるエビデンスの信頼性」を評価する\n3. 健全なエコシステムに載った R パッケージは、規制科学の「資産」になる\nあなたの貢献と日々の利用が、その基盤を支える\n\n今日のプレゼンから3点、改めて強調したいと思います。\nまず、あなたが使う R は、医薬品開発で使う R と同じです。 glm も survival も SHAP も、医薬品開発とその規制の両方の意思決定に入っている。 違うのは、経済データ、地理データなど、どの分野の問いに答えるか、それだけです。\n次に。サンプリングが、結論を反転させる。 SLE 試験の参加者割付地域も、皆さんのデータの標本抽出も、同じ構造です。 だから M15 は、モデルによるエビデンスの信頼性を評価する。\nもう1点は。健全なエコシステムに載った R パッケージは、医薬品開発と規制科学の 資産になる。皆さんのコントリビューションと日々の利用が、その基盤を支えます。\nこの分野に関心を持たれたかたがいらしたら、ぜひお話ししましょう。"
+  },
+  {
+    "objectID": "index.html#引用出典",
+    "href": "index.html#引用出典",
+    "title": "Model-Informed Drug Development と R",
+    "section": "引用・出典",
+    "text": "引用・出典\n\n主要論文\nGoteti K, French J, Garcia R, et al. Disease trajectory of SLE clinical endpoints and covariates affecting disease severity and probability of response. CPT Pharmacometrics Syst Pharmacol. 2023 Feb;12(2):180-195. doi:10.1002/psp4.12888 (PMCID: PMC9931431)\n後継論文\nGoteti K, Garcia R, Gillespie WR, French J, et al. Model-based meta-analysis using latent variable modeling to set benchmarks for new treatments of SLE. CPT Pharmacometrics Syst Pharmacol. 2024 Feb;13(2):281-295. doi:10.1002/psp4.13083\nICH M15\nICH M15 Guideline “General Principles for Model-Informed Drug Development” (Step 4 adopted 2026-01-29). EMA/CHMP/ICH/496426/2024, Step 5 発効 2026-07-23. FDA Federal Register 2026-11112 (2026-06-03).\nICH 定義の引用\nEuropean Medicines Agency, https://www.ema.europa.eu/en/partners-networks/international-activities/multilateral-coalitions-initiatives/international-council-harmonisation-technical-requirements-registration-pharmaceuticals-human-use-ich\n画像出典\nMalar rash: Doktorinternet, CC BY-SA 4.0, via Wikimedia Commons\nhttps://commons.wikimedia.org/wiki/File:Lupusfoto.jpg\nInteractive chart の免責\nδ係数は論文 Table S5 の実値。軌跡・応答率はモデルパラメータに\n基づく概念的例示であり、実際の臨床試験データではありません。"
+  }
+]
