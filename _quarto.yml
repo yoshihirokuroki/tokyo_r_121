@@ -1,0 +1,10 @@
+```yaml
+project:
+  type: website
+  output-dir: _site
+
+format:
+  revealjs:
+    theme: default
+    self-contained: false
+```
