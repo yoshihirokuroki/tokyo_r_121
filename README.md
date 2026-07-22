@@ -2,19 +2,7 @@
 
 Tokyo.R #121 応用セッション（2026-07-25）の発表資料リポジトリです。
 
-Quarto + Reveal.js で作成した、医薬品開発における R の役割を ICH M15 の文脈で論じるスライドと、疾患軌跡モデル（DTM）を題材にしたインタラクティブな plotly チャートを含みます。
-
----
-
-## 発表概要
-
-2026 年 7 月 23 日、EMA で **ICH M15（Model-Informed Drug Development の一般原則）** が発効しました。本発表はその 2 日後に行われたもので、M15 が「モデルの作り方（how to model）」ではなく「モデルから得られるエビデンスをどう評価し当局と共有するか（how to assess and communicate）」を定めた総則であることを起点に、次の 3 点を論じます。
-
-1. R は既に医薬品開発の意思決定基盤として動いている
-2. M15 は手法非依存（method-agnostic）であり、評価の焦点はツールではなくエビデンスの信頼性にある
-3. 健全なエコシステムに載った R パッケージは、規制科学の「資産」になりうる
-
-事例として、全身性エリテマトーデス（SLE）の疾患軌跡モデル（Goteti et al. 2023, *CPT: PSP*）を取り上げ、地域差が臨床試験の見かけの治療効果を反転させうることを、スライダー付きの plotly チャートで実演します。
+Quarto + Reveal.js でスライドを生成するqmdファイルと、スライドに含まれるインタラクティブな plotly チャートを生成する R スクリプトを含みます。
 
 ---
 
@@ -22,10 +10,14 @@ Quarto + Reveal.js で作成した、医薬品開発における R の役割を 
 
 ```
 .
-├── tokyo_r_121_yoshi.qmd   # メインのスライドソース（Quarto / Reveal.js）
-├── dtm_chart.R             # DTM インタラクティブチャート生成関数（plotly）
-├── custom.scss             # Reveal.js カスタムテーマ
-├── images/                 # スライドで使用する画像
+.github/
+│   ├── workflows
+│       └── publish.yml      # GitHub Actionsの設定ファイル
+├── _quarto.yml.             # GitHub Actionsの設定ファイル
+├── tokyo_r_121_yoshi.qmd    # メインのスライドソース（Quarto / Reveal.js）
+├── dtm_chart.R              # DTM インタラクティブチャート生成関数（plotly）
+├── custom.scss              # Reveal.js カスタムテーマ
+├── images/                  # スライドで使用する画像
 │   ├── Lupusfoto.jpg        #   SLE malar rash（CC BY-SA 4.0、出典は下記）
 │   ├── goteti2022_key.png   #   Goteti et al. 論文キービジュアル
 │   ├── stan_official.png    #   Stan 公式ロゴ
@@ -99,21 +91,6 @@ Rscript dtm_chart.R
 ```
 
 > **免責**: チャート中の δ 係数は論文 Table S5 の実値ですが、軌跡・応答率はモデルパラメータに基づく概念的な例示であり、実際の臨床試験データではありません。
-
----
-
-## 主要トピックと登場する R パッケージ
-
-発表で言及・使用する R パッケージ群です。
-
-| 領域 | パッケージ |
-|------|-----------|
-| 用量・曝露反応、生存解析 | `glm`, `lme4`, `nlme`, `survival`, `survminer` |
-| 共変量選択（統計 / 機械学習） | `glmnet`（LASSO）, `randomForest`, `Boruta`, `iml`（Shapley 値 / SHAP） |
-| ベイズ推定 | RStan / Stan |
-| 薬物動態モデリング | `nlmixr2`, `rxode2` |
-| 可視化・作図 | `ggplot2`, `plotly`, `DiagrammeR` |
-| 再現性 | `renv` ほか |
 
 ---
 
