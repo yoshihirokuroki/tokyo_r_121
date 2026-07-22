@@ -1,5 +1,5 @@
 # 。DS_Store
-.DS_Store 
+.DS_Store
 
 # History files
 .Rhistory
@@ -63,6 +63,7 @@ renv/python/
 renv/sandbox/
 renv/staging/
 
-# index.html
-index.html
-
+# Quarto
+/_site/
+/.quarto/
+**/*.quarto_ipynb

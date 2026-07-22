@@ -46,11 +46,11 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
 
       - name: Render Quarto project
-        run: quarto render tokyo_r_121_yoshi.qmd
+        run: quarto render
 
-      - name: Publish to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages

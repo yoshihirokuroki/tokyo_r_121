@@ -5,7 +5,7 @@ author: "Yoshihiro 'Yoshi' Kuroki"
 date: "2026-07-25"
 format:
   revealjs:
-    output-file: index.html    # ← この行を追加
+    output-file: index.html
     theme: [default, custom.scss]
     embed-resources: true
     slide-number: c/t
